@@ -1,7 +1,7 @@
-import { ICreateObjectDTO } from "../../dtos/ICreateObjectDTO";
+import { ICreateObjectDTO } from "../../infra/dtos/ICreateObjectDTO";
 
 interface IObjectRepository {
-  create({width, height, id}: ICreateObjectDTO): Promise<void>;
+  create({ width, height, user_id }: ICreateObjectDTO): Promise<void>;
 }
 
 export { IObjectRepository }

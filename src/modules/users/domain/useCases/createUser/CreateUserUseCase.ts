@@ -2,20 +2,16 @@ import { inject, injectable } from "tsyringe";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 import { hash } from "bcryptjs";
-
-interface IRequest {
-  email: string,
-  password: string,
-}
+import { ICreateUserDTO } from "../../../infra/dtos/ICreateUserDTO";
 
 @injectable()
 class CreateUserUseCase {
   constructor(
     @inject("UserRepository")
     private userRepository: IUserRepository
-  ) {}
+  ) { }
 
-  async execute({ email, password }: IRequest): Promise<void> {
+  async execute({ email, password }: ICreateUserDTO): Promise<void> {
     const emailExists = await this.userRepository.findByEmail(email);
 
     if (emailExists) {

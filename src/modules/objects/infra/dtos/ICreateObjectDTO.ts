@@ -1,7 +1,7 @@
 interface ICreateObjectDTO {
   width: number;
   height: number;
-  id: string;
+  user_id: string;
 }
 
 export { ICreateObjectDTO };
