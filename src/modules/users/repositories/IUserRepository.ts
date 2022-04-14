@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { UserEntity } from "../entities/UserEntity";
 
 interface IRequest {
   email: string,
@@ -7,7 +7,7 @@ interface IRequest {
 
 interface IUserRepository {
   create({ email, password }: IRequest): Promise<void>;
-  findByEmail(email: string): Promise<User>;
+  findByEmail(email: string): Promise<UserEntity>;
 };
 
 export { IUserRepository, IRequest };

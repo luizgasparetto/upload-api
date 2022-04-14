@@ -1,6 +1,8 @@
 import { inject, injectable } from "tsyringe";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
+import { hash } from "bcryptjs";
+
 interface IRequest {
   email: string,
   password: string,
@@ -20,7 +22,9 @@ class CreateUserUseCase {
       throw new Error("User already exists");
     }
 
-    await this.userRepository.create({ email, password });
+    const hashPassword = await hash(password, 8);
+
+    await this.userRepository.create({ email, password: hashPassword });
   }
 }
 

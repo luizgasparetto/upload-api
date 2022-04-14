@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { container } from "tsyringe";
-import { UserRepository } from "../../modules/user/repositories/implementations/UserRepository";
-import { IUserRepository } from "../../modules/user/repositories/IUserRepository";
+import { UserRepository } from "../../modules/users/repositories/implementations/UserRepository";
+import { IUserRepository } from "../../modules/users/repositories/IUserRepository";
 
 container.registerSingleton<IUserRepository>("UserRepository", UserRepository);
