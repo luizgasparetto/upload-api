@@ -27,6 +27,8 @@ async function ensureAuthenticated(request: Request, response: Response, next: N
       throw new AppError("User doesn't exists", 401);
     }
 
+    request.user = user;
+
     next();
   } catch (error) {
     throw new AppError("Token invalid", 401)

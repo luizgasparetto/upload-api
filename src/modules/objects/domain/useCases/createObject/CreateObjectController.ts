@@ -5,7 +5,7 @@ import { CreateObjectUseCase } from "./CreateObjectUseCase";
 class CreateObjectController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { width, height } = request.body;
-    const { user_id } = request.params;
+    const { id: user_id } = request.user;
 
     const createObjectUseCase = container.resolve(CreateObjectUseCase);
 

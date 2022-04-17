@@ -25,6 +25,7 @@ model Objects {
   width      Float
   height     Float
   user_id    String
+  image_url  String?
   user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   created_at DateTime @default(now())
 
