@@ -3,7 +3,7 @@ import path from "path";
 import crypto from "crypto";
 import multerS3 from "multer-s3";
 import aws, { CodeBuild } from "aws-sdk";
-import { AppError } from "../infra/errors/AppError";
+import { AppError } from "../errors/AppError";
 
 const storageTypes = {
   local: multer.diskStorage({
@@ -48,7 +48,6 @@ const multerConfig = {
       "image/jpeg",
       "image/pjpeg",
       "image/png",
-      "image/gif"
     ];
 
     if (allowedMimes.includes(file.mimetype)) {
