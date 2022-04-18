@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { UpdateImageObjectUseCase } from "./UpdateObjectImageUseCase";
+import { UpdateObjectImageUseCase } from "./UpdateObjectImageUseCase";
 
 class UpdateObjectImageController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -13,7 +13,7 @@ class UpdateObjectImageController {
     const filename = file.filename as string;
     const url = file["location"] as string;
 
-    const updateObjectImageUseCase = container.resolve(UpdateImageObjectUseCase);
+    const updateObjectImageUseCase = container.resolve(UpdateObjectImageUseCase);
 
     await updateObjectImageUseCase.execute({ object_id, url, filename });
 

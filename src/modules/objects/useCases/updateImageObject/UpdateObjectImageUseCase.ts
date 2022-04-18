@@ -1,15 +1,16 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
+import { IUpdateObjectDTO } from "../../dtos/IUpdateObjectDTO";
 import { IObjectRepository } from "../../repositories/IObjectsRepository";
 
 @injectable()
-class UpdateImageObjectUseCase {
+class UpdateObjectImageUseCase {
   constructor(
     @inject("ObjectsRepository")
     private objectsRepository: IObjectRepository
   ) { }
 
-  async execute({ object_id, url, filename }): Promise<void> {
+  async execute({ object_id, url, filename }: IUpdateObjectDTO): Promise<void> {
     const objectExists = await this.objectsRepository.findById(object_id);
 
     if (!objectExists) {
@@ -20,8 +21,8 @@ class UpdateImageObjectUseCase {
       url = `http://localhost:3333/files/${filename}`;
     }
 
-    await this.objectsRepository.updateImage({ object_id, image_url: url });
+    await this.objectsRepository.updateImage({ object_id, url });
   }
 }
 
-export { UpdateImageObjectUseCase };
+export { UpdateObjectImageUseCase };

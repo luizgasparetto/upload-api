@@ -10,9 +10,7 @@ class GetObjectUseCase {
   ) { }
 
   async execute(): Promise<ObjectEntity[]> {
-    const objects = await this.objectsRepository.getObjects();
-
-    return objects;
+    return await this.objectsRepository.getObjects();
   }
 }
 

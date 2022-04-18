@@ -6,7 +6,7 @@ import express, { Response, Request, NextFunction } from "express";
 import "../container";
 
 import { router } from "./routes";
-import { AppError } from "../errors/AppError";
+import { AppError } from "../../errors/AppError";
 import morgan from "morgan";
 
 const app = express();

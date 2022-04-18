@@ -17,13 +17,13 @@ class ObjectsRepository implements IObjectRepository {
         height,
         user_id
       }
-    })
+    });
   }
 
-  async updateImage({ object_id, image_url }: IUpdateObjectDTO): Promise<void> {
+  async updateImage({ object_id, url }: IUpdateObjectDTO): Promise<void> {
     await this.prisma.objects.update({
       where: { id: object_id },
-      data: { image_url }
+      data: { image_url: url }
     })
   }
 

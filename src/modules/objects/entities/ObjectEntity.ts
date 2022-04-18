@@ -4,7 +4,8 @@ class ObjectEntity {
   id?: string;
   width: number;
   height: number;
-  
+  image_url?: string;
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();

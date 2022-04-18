@@ -1,7 +1,7 @@
 interface IUpdateObjectDTO {
   object_id: string;
-  image_url: string;
-  key?: string;
+  url?: string;
+  filename?: string;
 }
 
 export { IUpdateObjectDTO };
