@@ -9,8 +9,8 @@ import { IObjectRepository } from "../../repositories/IObjectsRepository";
 class CreateObjectUseCase {
   constructor(
     @inject("ObjectsRepository")
-    @inject("UserRepository")
     private objectsRepository: IObjectRepository,
+    @inject("UserRepository")
     private userRepository: IUserRepository
   ) { }
 

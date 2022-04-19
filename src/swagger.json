@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Upload API Documentation",
+    "description": "This is an Upload API, used to create your own user, authenticate and upload your images/gifs your AWS",
+    "version": "1.0.0",
+    "contact": {
+      "email": "luizegasp@gmail.com"
+    }
+  },
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create an user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "user@email.com",
+                  "password": "userpassword"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Authenticate an user",
+        "description": "Authenticate an existing user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "user@email.com",
+                  "password": "userpassword"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Authenticated"
+          },
+          "400": {
+            "description": "User doesn't exists"
+          }
+        }
+      }
+    }
+  }
+}

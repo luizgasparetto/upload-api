@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { CreateObjectController } from "../../../modules/objects/useCases/createObject/CreateObjectController";
-import { UpdateObjectImageController } from "../../../modules/objects/useCases/updateImageObject/UpdateObjectImageController";
-import { ensureAuthenticated } from "../../middlewares/ensureAuthenticated";
+import { CreateObjectController } from "../../../../modules/objects/useCases/createObject/CreateObjectController";
+import { UpdateObjectImageController } from "../../../../modules/objects/useCases/updateImageObject/UpdateObjectImageController";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 import multer from "multer";
-import { multerConfig } from "../../config/multer";
-import { GetObjectsController } from "../../../modules/objects/useCases/getObjects/GetObjectsController";
-import { DeleteObjectController } from "../../../modules/objects/useCases/deleteObject/DeleteObjectController";
+import { multerConfig } from "../../../../config/multer";
+import { GetObjectsController } from "../../../../modules/objects/useCases/getObjects/GetObjectsController";
+import { DeleteObjectController } from "../../../../modules/objects/useCases/deleteObject/DeleteObjectController";
 
 const objectsRouter = Router();
 
