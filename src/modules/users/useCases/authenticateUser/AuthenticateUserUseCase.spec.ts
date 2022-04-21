@@ -2,7 +2,7 @@ import { AppError } from "../../../../shared/errors/AppError";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { UserRepositoryInMemory } from "../../repositories/in-memory/UserRepositoryInMemory";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
-import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
+import { AuthenticateUserUseCase, IResponse } from "./AuthenticateUserUseCase";
 
 let userRepositoryInMemory: UserRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
@@ -26,6 +26,7 @@ describe("Authenticate User", () => {
     const result = await authenticateUserUseCase.execute({ email: user.email, password: user.password });
 
     expect(result).toHaveProperty("token");
+    expect(result).toHaveProperty("user");
   });
 
   it("should not be able to authenticate a nonexisting user", () => {

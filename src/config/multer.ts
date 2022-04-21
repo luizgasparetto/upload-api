@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 import crypto from "crypto";
 import multerS3 from "multer-s3";
-import aws, { CodeBuild } from "aws-sdk";
+import aws from "aws-sdk";
 import { AppError } from "../shared/errors/AppError";
 
 const storageTypes = {

@@ -13,6 +13,7 @@ interface IRequest {
 interface IResponse {
   token: string,
   user: {
+    id: string,
     email: string,
   }
 }
@@ -44,11 +45,11 @@ class AuthenticateUserUseCase {
 
     const tokenReturn: IResponse = {
       token,
-      user: { email }
+      user: { id: user.id, email }
     }
 
     return tokenReturn;
   }
 }
 
-export { AuthenticateUserUseCase };
+export { AuthenticateUserUseCase, IResponse };

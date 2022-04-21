@@ -6,12 +6,14 @@ import { IUserRepository } from "../IUserRepository";
 class UserRepositoryInMemory implements IUserRepository {
   public users: UserEntity[] = [];
 
-  async create({ email, password }: ICreateUserDTO): Promise<void> {
+  async create({ email, password }: ICreateUserDTO): Promise<UserEntity> {
     const user = new UserEntity();
 
     Object.assign(user, { email, password });
 
     this.users.push(user);
+
+    return user;
   }
 
   async delete({ id }: IDeleteUserDTO): Promise<void> {

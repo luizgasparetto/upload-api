@@ -6,6 +6,7 @@ import { IUserRepository } from "../../repositories/IUserRepository";
 import { hash } from "bcryptjs";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { AppError } from "../../../../shared/errors/AppError";
+import { UserEntity } from "../../entities/UserEntity";
 
 @injectable()
 class CreateUserUseCase {
@@ -14,7 +15,7 @@ class CreateUserUseCase {
     private userRepository: IUserRepository
   ) { }
 
-  async execute({ email, password }: ICreateUserDTO): Promise<void> {
+  async execute({ email, password }: ICreateUserDTO): Promise<UserEntity> {
     const emailExists = await this.userRepository.findByEmail(email);
 
     if (emailExists) {
@@ -23,7 +24,9 @@ class CreateUserUseCase {
 
     const hashPassword = await hash(password, 8);
 
-    await this.userRepository.create({ email, password: hashPassword });
+    const user = await this.userRepository.create({ email, password: hashPassword });
+
+    return user;
   }
 }
 
