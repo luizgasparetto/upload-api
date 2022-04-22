@@ -5,6 +5,7 @@ import express, { Response, Request, NextFunction } from "express";
 import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
 import cors from "cors";
+import "dotenv/config";
 
 import swaggerFile from "../../../swagger.json";
 import "../../container";
