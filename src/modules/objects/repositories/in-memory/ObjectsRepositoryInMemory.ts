@@ -7,7 +7,7 @@ import { IObjectRepository } from "../IObjectsRepository";
 class ObjectsRepositoryInMemory implements IObjectRepository {
   public objects: ObjectEntity[] = [];
 
-  async create({ width, height, user_id }: ICreateObjectDTO): Promise<void> {
+  async create({ width, height, user_id }: ICreateObjectDTO): Promise<ObjectEntity> {
     const object = new ObjectEntity();
 
     Object.assign(object, {
@@ -17,6 +17,8 @@ class ObjectsRepositoryInMemory implements IObjectRepository {
     });
 
     this.objects.push(object);
+
+    return object;
   }
 
   async updateImage({ object_id, url }: IUpdateObjectDTO): Promise<void> {

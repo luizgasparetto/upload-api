@@ -10,14 +10,16 @@ import { IDeleteObjectDTO } from "../../dtos/IDeleteObjectDTO";
 class ObjectsRepository implements IObjectRepository {
   private prisma = new PrismaClient();
 
-  async create({ width, height, user_id }: ICreateObjectDTO): Promise<void> {
-    await this.prisma.objects.create({
+  async create({ width, height, user_id }: ICreateObjectDTO): Promise<ObjectEntity> {
+    const object = await this.prisma.objects.create({
       data: {
         width,
         height,
         user_id
       }
     });
+
+    return object;
   }
 
   async updateImage({ object_id, url }: IUpdateObjectDTO): Promise<void> {

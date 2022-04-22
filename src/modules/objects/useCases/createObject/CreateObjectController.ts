@@ -9,9 +9,9 @@ class CreateObjectController {
 
     const createObjectUseCase = container.resolve(CreateObjectUseCase);
 
-    await createObjectUseCase.execute({ width, height, user_id });
+    const object = await createObjectUseCase.execute({ width, height, user_id });
 
-    return response.status(201).json({ message: "Object created successfully" });
+    return response.status(201).json({ message: "Object created successfully", object });
   }
 }
 

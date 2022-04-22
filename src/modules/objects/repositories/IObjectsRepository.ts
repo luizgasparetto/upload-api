@@ -4,7 +4,7 @@ import { IUpdateObjectDTO } from "../dtos/IUpdateObjectDTO";
 import { ObjectEntity } from "../entities/ObjectEntity";
 
 interface IObjectRepository {
-  create({ width, height, user_id }: ICreateObjectDTO): Promise<void>;
+  create({ width, height, user_id }: ICreateObjectDTO): Promise<ObjectEntity>;
   updateImage({ object_id, url }: IUpdateObjectDTO): Promise<void>;
   delete({ object_id }: IDeleteObjectDTO): Promise<void>;
   getObjects(): Promise<ObjectEntity[]>;
