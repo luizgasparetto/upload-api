@@ -1,16 +1,17 @@
 import "reflect-metadata";
+import "dotenv/config";
 import "express-async-errors";
 import path from "path";
 import express, { Response, Request, NextFunction } from "express";
 import swaggerUi from "swagger-ui-express";
-import morgan from "morgan";
 import cors from "cors";
-import "dotenv/config";
 
-import swaggerFile from "../../../swagger.json";
+
 import "../../container";
+import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
 import { AppError } from "../../errors/AppError";
+import morgan from "morgan";
 
 const app = express();
 
@@ -31,4 +32,4 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
   return response.status(500).json({ message: "Unknown server error", error: err.message });
 });
 
-app.listen(3333, () => console.log("🔥 Running 🔥"));
+app.listen(3333, () => console.log("🔥 Running on port 3333 🔥"));
