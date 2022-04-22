@@ -1,3 +1,4 @@
+import "dotenv"
 import "reflect-metadata";
 import "express-async-errors";
 import path from "path";
