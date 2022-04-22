@@ -1,12 +1,14 @@
 import "reflect-metadata";
+import "dotenv/config";
 import "express-async-errors";
 import path from "path";
 
 import express, { Response, Request, NextFunction } from "express";
-import dot from "dotenv";
 import "../../container";
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "../../../swagger.json";
+
+// att commit
 
 import { router } from "./routes";
 import { AppError } from "../../errors/AppError";
@@ -15,8 +17,6 @@ import morgan from "morgan";
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
-
-dot.config();
 
 app.use("/files", express.static(path.resolve(__dirname, "..", "..", "..", "tmp", "uploads")));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
