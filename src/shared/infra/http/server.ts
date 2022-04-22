@@ -1,17 +1,19 @@
 import "reflect-metadata";
 import "express-async-errors";
 import path from "path";
-
 import express, { Response, Request, NextFunction } from "express";
-import "../../container";
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "../../../swagger.json";
+import morgan from "morgan";
+import cors from "cors";
 
+import swaggerFile from "../../../swagger.json";
+import "../../container";
 import { router } from "./routes";
 import { AppError } from "../../errors/AppError";
-import morgan from "morgan";
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -28,4 +30,4 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
   return response.status(500).json({ message: "Unknown server error", error: err.message });
 });
 
-app.listen(3333, () => console.log("🔥 Running on port 3333 🔥"));
+app.listen(3333, () => console.log("🔥 Running 🔥"));
