@@ -22,7 +22,7 @@ const storageTypes = {
   }),
   s3: multerS3({
     s3: new aws.S3(),
-    bucket: process.env.AWS_BUCKET_NAME,
+    bucket: "vizion-bucket",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: "public-read",
     key: (req, file, callback) => {
@@ -39,7 +39,7 @@ const storageTypes = {
 
 const multerConfig = {
   dest: path.resolve(__dirname, "..", "..", "..", "tmp", "uploads"),
-  storage: storageTypes[process.env.AWS_STORAGE_TYPE],
+  storage: storageTypes["s3"],
   limits: {
     fileSize: 2 * 1024 * 1024
   },
