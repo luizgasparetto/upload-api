@@ -11,11 +11,15 @@ class DeleteObjectUseCase {
     private objectsRepository: IObjectRepository
   ) { }
 
-  async execute({ object_id }: IDeleteObjectDTO): Promise<void> {
+  async execute({ object_id, user_id }: IDeleteObjectDTO): Promise<void> {
     const objectExists = await this.objectsRepository.findById(object_id);
 
     if (!objectExists) {
       throw new AppError("Object doesn't exists");
+    }
+
+    if (objectExists.user_id != user_id) {
+      throw new AppError("You haven't created this object", 403);
     }
 
     await this.objectsRepository.delete({ object_id });

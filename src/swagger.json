@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Upload API Documentation",
-    "description": "This is an Upload API, used to create your own user, authenticate and upload your images your AWS",
+    "title": "Vizion API Documentation",
+    "description": "This is an upload API, used to create your own user, authenticate and upload your images in an AWS Bucket.<br> With this API you can implement an application that will measure objects, no longer needing to do mathematical calculations by hand.",
     "version": "1.0.0",
     "contact": {
       "email": "luizegasp@gmail.com"
@@ -11,11 +11,9 @@
   "paths": {
     "/user": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Create an user",
-        "description": "Create a new user",
+        "description": "Create a new user, just one user per e-mail",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39,7 +37,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "User created"
           },
           "400": {
             "description": "User already exists"
@@ -47,9 +45,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Delete an user",
         "description": "Delete an existent user",
         "security": [
@@ -73,7 +69,7 @@
           "User"
         ],
         "summary": "Authenticate an user",
-        "description": "Authenticate an existing user",
+        "description": "Authenticate an existing user, your email and password must match",
         "requestBody": {
           "content": {
             "application/json": {
@@ -97,10 +93,10 @@
         },
         "responses": {
           "201": {
-            "description": "Authenticated"
+            "description": "User authenticated"
           },
           "400": {
-            "description": "User doesn't exists"
+            "description": "Email/password doesn't match"
           }
         }
       }
@@ -109,7 +105,7 @@
       "post": {
         "tags": [ "Objects" ],
         "summary": "Create an object",
-        "description": "Create a new object",
+        "description": "Create a new object, you must be authenticated to create an object",
         "security": [ { "bearerAuth": [] } ],
         "requestBody": {
           "content": {
@@ -155,7 +151,7 @@
       "patch": {
         "tags": [ "Objects" ],
         "summary": "Update the object's image",
-        "description": "Update the image of an existent object",
+        "description": "Update the image of an existent object, you must be authenticated to update your object's image.<br>Remember that you need to pass the Object ID you created earlier.<br>You can only update the objects that you have created by yourself",
         "security": [ { "bearerAuth": [] } ],
         "parameters": [
           {
@@ -186,13 +182,19 @@
         "responses": {
           "204": {
             "description": "Image updated successfully"
+          },
+          "400": {
+            "description": "Object doesn't exists"
+          },
+          "403": {
+            "description": "This object was not created by you"
           }
         }
       },
       "delete": {
         "tags": [ "Objects" ],
         "summary": "Delete an object",
-        "description": "Delete an existent object",
+        "description": "Delete an existent object, you must be authenticated to update your object's image.<br>Remember that you need to pass the Object ID that you want to delete.<br>You can only delete objects that you have created by yourself",
         "security": [ { "bearerAuth": [] } ],
         "parameters": [
           {
@@ -208,6 +210,12 @@
         "responses": {
           "200": {
             "description": "Object deleted successfully"
+          },
+          "400": {
+            "description": "Object doesn't exists"
+          },
+          "403": {
+            "description": "This object was not created by you"
           }
         }
       }

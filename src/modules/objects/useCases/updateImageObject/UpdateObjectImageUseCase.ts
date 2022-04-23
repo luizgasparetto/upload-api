@@ -10,11 +10,15 @@ class UpdateObjectImageUseCase {
     private objectsRepository: IObjectRepository
   ) { }
 
-  async execute({ object_id, url, filename }: IUpdateObjectDTO): Promise<void> {
+  async execute({ object_id, url, filename, user_id }: IUpdateObjectDTO): Promise<void> {
     const objectExists = await this.objectsRepository.findById(object_id);
 
     if (!objectExists) {
       throw new AppError("Object doesn't exists");
+    }
+
+    if (objectExists.user_id != user_id) {
+      throw new AppError("You haven't created this object", 403);
     }
 
     if (!url) {

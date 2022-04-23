@@ -5,6 +5,7 @@ class ObjectEntity {
   width: number;
   height: number;
   image_url?: string;
+  user_id: string;
 
   constructor() {
     if (!this.id) {
