@@ -54,7 +54,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "User deleted successfully"
           },
           "400": {
