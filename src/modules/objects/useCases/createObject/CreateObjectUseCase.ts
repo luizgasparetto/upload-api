@@ -5,6 +5,7 @@ import { IUserRepository } from "../../../users/repositories/IUserRepository";
 import { ICreateObjectDTO } from "../../dtos/ICreateObjectDTO";
 import { IObjectRepository } from "../../repositories/IObjectsRepository";
 
+// url, filename, user_id
 @injectable()
 class CreateObjectUseCase {
   constructor(
@@ -14,14 +15,18 @@ class CreateObjectUseCase {
     private userRepository: IUserRepository
   ) { }
 
-  async execute({ width, height, user_id }: ICreateObjectDTO): Promise<void> {
+  async execute({ url, filename, user_id }: ICreateObjectDTO): Promise<void> {
     const user = await this.userRepository.findById(user_id);
 
     if (!user) {
       throw new AppError("User doesn't exists");
     }
 
-    await this.objectsRepository.create({ width, height, user_id });
+    if (!url) {
+      url = `http://localhost:3333/files/${filename}`;
+    }
+
+    await this.objectsRepository.create({ url, filename, user_id });
   }
 }
 

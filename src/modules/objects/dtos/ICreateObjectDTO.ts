@@ -1,6 +1,6 @@
 interface ICreateObjectDTO {
-  width: number;
-  height: number;
+  url: string;
+  filename: string;
   user_id: string;
 }
 

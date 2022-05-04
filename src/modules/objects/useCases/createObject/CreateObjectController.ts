@@ -4,12 +4,17 @@ import { CreateObjectUseCase } from "./CreateObjectUseCase";
 
 class CreateObjectController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { width, height } = request.body;
+    // const { width, height } = request.body;
     const { id: user_id } = request.user;
+
+    const file = request.file as Express.Multer.File;
+
+    const filename = file.filename as string;
+    const url = file["location"] as string;
 
     const createObjectUseCase = container.resolve(CreateObjectUseCase);
 
-    await createObjectUseCase.execute({ width, height, user_id });
+    await createObjectUseCase.execute({ url, filename, user_id });
 
     return response.status(201).json({ message: "Object created successfully" });
   }

@@ -5,19 +5,26 @@ import { IObjectRepository } from "../IObjectsRepository";
 import { ObjectEntity } from "../../entities/ObjectEntity";
 import { IUpdateObjectDTO } from "../../dtos/IUpdateObjectDTO";
 import { IDeleteObjectDTO } from "../../dtos/IDeleteObjectDTO";
+import axios, { AxiosResponse } from "axios";
 
-
+interface IResponsePython {
+  width: number;
+  height: number;
+}
 class ObjectsRepository implements IObjectRepository {
   private prisma = new PrismaClient();
 
-  async create({ width, height, user_id }: ICreateObjectDTO): Promise<void> {
+  async create({ url, user_id }: ICreateObjectDTO): Promise<void> {
+    const pythonResponse = await this.getWidthAndHeight(url);
+
     await this.prisma.objects.create({
       data: {
-        width,
-        height,
-        user_id
+        width: pythonResponse.width,
+        height: pythonResponse.height,
+        user_id,
+        image_url: url
       }
-    });
+    })
   }
 
   async updateImage({ object_id, url }: IUpdateObjectDTO): Promise<void> {
@@ -45,6 +52,17 @@ class ObjectsRepository implements IObjectRepository {
     })
 
     return object;
+  }
+
+  async getWidthAndHeight(url: string): Promise<IResponsePython> {
+    const pythonAPI = "http://18.231.151.26/measurement";
+
+    const request = await axios.post(pythonAPI, {
+      'image_url': url
+    }) 
+    const { width, height } = request.data;
+
+    return { width, height } as IResponsePython;
   }
 }
 

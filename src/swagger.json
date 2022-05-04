@@ -109,19 +109,14 @@
         "security": [ { "bearerAuth": [] } ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
+                "type": "object",
                 "properties": {
-                  "width": {
-                    "type": "number"
-                  } ,
-                  "height": {
-                    "type": "number"
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
                   }
-                },
-                "example": {
-                  "width": 200,
-                  "height": 200
                 }
               }
             }
@@ -148,49 +143,6 @@
       }
     },
     "/objects/{id}": {
-      "patch": {
-        "tags": [ "Objects" ],
-        "summary": "Update the object's image",
-        "description": "Update the image of an existent object, you must be authenticated to update your object's image.<br>Remember that you need to pass the Object ID you created earlier.<br>You can only update the objects that you have created by yourself",
-        "security": [ { "bearerAuth": [] } ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Object ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "image": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Image updated successfully"
-          },
-          "400": {
-            "description": "Object doesn't exists"
-          },
-          "403": {
-            "description": "This object was not created by you"
-          }
-        }
-      },
       "delete": {
         "tags": [ "Objects" ],
         "summary": "Delete an object",
