@@ -7,9 +7,9 @@ import { IDeleteUserDTO } from "../../dtos/IDeleteUserDTO";
 class UserRepository implements IUserRepository {
   private prisma = new PrismaClient();
 
-  async create({ email, password }: ICreateUserDTO): Promise<UserEntity> {
+  async create({ name, email, password }: ICreateUserDTO): Promise<UserEntity> {
     const user = await this.prisma.user.create({
-      data: { email, password },
+      data: { name, email, password },
     })
 
     return user;
