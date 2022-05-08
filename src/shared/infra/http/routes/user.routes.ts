@@ -10,7 +10,7 @@ const getUserController = new GetUserController();
 const createUserController = new CreateUserController();
 const deleteUserController = new DeleteUserController();
 
-userRoutes.get("/", getUserController.handle);
+userRoutes.get("/", ensureAuthenticated, getUserController.handle);
 userRoutes.post("/", createUserController.handle);
 userRoutes.delete("/", ensureAuthenticated, deleteUserController.handle);
 
