@@ -3,6 +3,8 @@
     "target": "es2021",           
     "experimentalDecorators": true,                  
     "emitDecoratorMetadata": true,
+    "outDir": "./dist",
+    "rootDir": ".",
     "module": "commonjs",                             
     "resolveJsonModule": true,                                   
     "esModuleInterop": true,                          

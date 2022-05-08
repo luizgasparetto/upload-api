@@ -10,6 +10,24 @@
   },
   "paths": {
     "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get User",
+        "description": "Get user's information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found"
+          },
+          "400": {
+            "description": "User doesn't exists"
+          }
+        }
+      },
       "post": {
         "tags": ["User"],
         "summary": "Create an user",
