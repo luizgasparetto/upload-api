@@ -3,6 +3,7 @@ import { ObjectEntity } from "../../objects/entities/ObjectEntity";
 
 class UserEntity {
   id?: string;
+  name: string;
   email: string;
   password: string;
   objects?: ObjectEntity[];
