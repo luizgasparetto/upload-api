@@ -4,7 +4,6 @@ import { CreateObjectUseCase } from "./CreateObjectUseCase";
 
 class CreateObjectController {
   async handle(request: Request, response: Response): Promise<Response> {
-    // const { width, height } = request.body;
     const { id: user_id } = request.user;
 
     const file = request.file as Express.Multer.File;

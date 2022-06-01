@@ -35,9 +35,7 @@ class ObjectsRepository implements IObjectRepository {
   }
 
   async delete({ object_id }: IDeleteObjectDTO): Promise<void> {
-    await this.prisma.objects.delete({
-      where: { id: object_id }
-    })
+    await this.prisma.objects.deleteMany();
   }
 
   async getObjects(): Promise<ObjectEntity[]> {
@@ -59,7 +57,7 @@ class ObjectsRepository implements IObjectRepository {
 
     const request = await axios.post(pythonAPI, {
       'image_url': url
-    }) 
+    })
     const { width, height } = request.data;
 
     return { width, height } as IResponsePython;
